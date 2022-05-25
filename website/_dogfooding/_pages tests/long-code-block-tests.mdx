@@ -1,0 +1,33 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+[// spell-checker:disable]: #
+
+<Tabs>
+
+<TabItem value="yum" label="Yum">
+
+```abnf title="/etc/yum.repos.d/pomerium-pomerium.repo"
+[pomerium-pomerium]
+name=pomerium-pomerium
+baseurl=https://dl.cloudsmith.io/public/pomerium/pomerium/rpm/el/$releasever/$basearch
+repo_gpgcheck=1
+enabled=1
+gpgkey=https://dl.cloudsmith.io/public/pomerium/pomerium/gpg.6E388440B94E1407.key
+gpgcheck=1
+sslverify=1
+pkg_gpgcheck=1
+```
+
+</TabItem>
+<TabItem value="deb" label="Deb">
+
+```bash
+curl -1sLf 'https://dl.cloudsmith.io/public/pomerium/pomerium/gpg.6E388440B94E1407.key' | apt-key add -
+echo "deb https://dl.cloudsmith.io/public/pomerium/pomerium/deb/debian buster main" > /etc/apt/sources.list.d/pomerium-pomerium.list
+```
+
+</TabItem>
+</Tabs>
+
+[// spell-checker:enable]: #
