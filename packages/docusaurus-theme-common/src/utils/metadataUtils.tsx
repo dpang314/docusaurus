@@ -9,14 +9,14 @@ import React, {type ReactNode} from 'react';
 import clsx from 'clsx';
 import Head from '@docusaurus/Head';
 import useRouteContext from '@docusaurus/useRouteContext';
-// import {useBaseUrlUtils} from '@docusaurus/useBaseUrl';
+import {useBaseUrlUtils} from '@docusaurus/useBaseUrl';
 import {useTitleFormatter} from './generalUtils';
 
 type PageMetadataProps = {
   readonly title?: string;
   readonly description?: string;
   readonly keywords?: readonly string[] | string;
-  // readonly image?: string;
+  readonly image?: string;
   readonly children?: ReactNode;
 };
 
@@ -28,12 +28,12 @@ export function PageMetadata({
   title,
   description,
   keywords,
-  // image,
+  image,
   children,
 }: PageMetadataProps): JSX.Element {
   const pageTitle = useTitleFormatter(title);
-  // const {withBaseUrl} = useBaseUrlUtils();
-  // const pageImage = image ? withBaseUrl(image, {absolute: true}) : undefined;
+  const {withBaseUrl} = useBaseUrlUtils();
+  const pageImage = image ? withBaseUrl(image, {absolute: true}) : undefined;
 
   return (
     <Head>
@@ -53,8 +53,7 @@ export function PageMetadata({
         />
       )}
 
-      {/* {pageImage && <meta property="og:image" content={pageImage} />}
-      {pageImage && <meta name="twitter:image" content={pageImage} />} */}
+      {pageImage && <meta name="old-image" content={pageImage} />}
 
       {children}
     </Head>
