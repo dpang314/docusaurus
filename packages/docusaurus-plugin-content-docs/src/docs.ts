@@ -19,7 +19,6 @@ import {
   Globby,
   normalizeFrontMatterTags,
 } from '@docusaurus/utils';
-
 import {getFileLastUpdate} from './lastUpdate';
 import getSlug from './slug';
 import {CURRENT_VERSION_NAME} from './constants';
@@ -39,8 +38,8 @@ import type {
   LoadedVersion,
   FileChange,
 } from '@docusaurus/plugin-content-docs';
-import type {LoadContext} from '@docusaurus/types';
 import type {SidebarsUtils} from './sidebars/utils';
+import type {LoadContext} from '@docusaurus/types';
 import type {DocFile} from './types';
 
 type LastUpdateOptions = Pick<
@@ -296,6 +295,13 @@ async function doProcessDocMetadata({
       : undefined,
     sidebarPosition,
     frontMatter,
+    socialCardUrl: context.siteConfig.socialCardService.getUrl({
+      title,
+      description,
+      docVersion: versionMetadata.versionName,
+      type: 'doc',
+      defaults: context.siteConfig.socialCardService.defaults,
+    }),
   };
 }
 

@@ -81,6 +81,22 @@ export type I18nConfig = {
   localeConfigs: {[locale: string]: Partial<I18nLocaleConfig>};
 };
 
+export type SocialCardDefaults = {
+  projectName: string;
+  projectLogo: string;
+};
+
+export type SocialCardData = {
+  readonly title?: string;
+  readonly description?: string;
+  readonly authorName?: string;
+  readonly authorProfileImage?: string;
+  readonly docVersion?: string;
+  readonly baseUrl?: string;
+  readonly type: 'doc' | 'blog' | 'jsxPage' | 'mdxPage' | '404' | 'default';
+  defaults: SocialCardDefaults;
+};
+
 /**
  * Docusaurus config, after validation/normalization.
  */
@@ -334,6 +350,10 @@ export type DocusaurusConfig = {
      * rule set.
      */
     jsLoader: 'babel' | ((isServer: boolean) => RuleSetRule);
+  };
+  socialCardService: {
+    getUrl: (data: SocialCardData) => string;
+    defaults: SocialCardDefaults;
   };
 };
 

@@ -33,6 +33,7 @@ declare module '@docusaurus/plugin-content-pages' {
     type: 'jsx';
     permalink: string;
     source: string;
+    socialCardUrl: string;
   };
 
   export type MDXPageMetadata = {
@@ -42,6 +43,7 @@ declare module '@docusaurus/plugin-content-pages' {
     frontMatter: FrontMatter & {[key: string]: unknown};
     title?: string;
     description?: string;
+    socialCardUrl: string;
   };
 
   export type Metadata = JSXPageMetadata | MDXPageMetadata;

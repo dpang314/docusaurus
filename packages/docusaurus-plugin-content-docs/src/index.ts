@@ -224,6 +224,7 @@ export default async function pluginContentDocs(
           ...version,
           sidebarsUtils,
           categoryGeneratedIndices: getCategoryGeneratedIndexMetadataList({
+            context,
             docs: version.docs,
             sidebarsUtils,
           }),
@@ -299,6 +300,17 @@ export default async function pluginContentDocs(
         ),
       );
 
+      const out: {[key: string]: string} = {};
+
+      for (const version of versions) {
+        for (const doc of version.docs) {
+          out[`${version.path}${doc.slug}`] = doc.socialCardUrl;
+        }
+        for (const category of version.categoryGeneratedIndices) {
+          out[`${version.path}${category.slug}`] = category.socialCardUrl;
+        }
+      }
+
       // TODO tags should be a sub route of the version route
       await Promise.all(versions.map(createVersionTagsRoutes));
 
@@ -306,6 +318,7 @@ export default async function pluginContentDocs(
         path: normalizeUrl([baseUrl, options.routeBasePath]),
         versions: versions.map(toGlobalDataVersion),
         breadcrumbs,
+        socialCardUrls: out,
       });
     },
 

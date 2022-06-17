@@ -326,6 +326,11 @@ async function processBlogSourceFile(
       truncated: truncateMarker.test(content),
       authors,
       frontMatter,
+      socialCardUrl: context.siteConfig.socialCardService.getUrl({
+        title,
+        type: 'blog',
+        defaults: context.siteConfig.socialCardService.defaults,
+      }),
     },
     content,
   };

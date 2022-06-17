@@ -221,6 +221,7 @@ declare module '@docusaurus/plugin-content-blog' {
     readonly frontMatter: BlogPostFrontMatter & {[key: string]: unknown};
     /** Tags, normalized. */
     readonly tags: Tag[];
+    socialCardUrl: string;
   };
   /**
    * @returns The edit URL that's directly plugged into metadata.

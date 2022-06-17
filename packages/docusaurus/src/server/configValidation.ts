@@ -10,7 +10,11 @@ import {
   DEFAULT_I18N_DIR_NAME,
 } from '@docusaurus/utils';
 import {Joi, URISchema, printWarning} from '@docusaurus/utils-validation';
-import type {DocusaurusConfig, I18nConfig} from '@docusaurus/types';
+import type {
+  DocusaurusConfig,
+  I18nConfig,
+  SocialCardData,
+} from '@docusaurus/types';
 
 const DEFAULT_I18N_LOCALE = 'en';
 
@@ -40,6 +44,7 @@ export const DEFAULT_CONFIG: Pick<
   | 'tagline'
   | 'baseUrlIssueBanner'
   | 'staticDirectories'
+  | 'socialCardService'
 > = {
   i18n: DEFAULT_I18N_CONFIG,
   onBrokenLinks: 'throw',
@@ -58,6 +63,29 @@ export const DEFAULT_CONFIG: Pick<
   tagline: '',
   baseUrlIssueBanner: true,
   staticDirectories: [DEFAULT_STATIC_DIR_NAME],
+  socialCardService: {
+    getUrl: ({
+      title,
+      // description,
+      // authorName,
+      // authorProfileImage,
+      // docVersion,
+      // baseUrl,
+      type,
+    }: // defaults,
+    SocialCardData) => {
+      switch (type) {
+        case 'doc':
+          return `https://docusaurus-og-image.vercel.app/${title}`;
+        default:
+          return 'https://docusaurus-og-image.vercel.app/default';
+      }
+    },
+    defaults: {
+      projectName: 'Docusaurus',
+      projectLogo: 'https://docusaurus.io/img/docusaurus.svg',
+    },
+  },
 };
 
 function createPluginSchema(theme: boolean) {
@@ -235,6 +263,9 @@ export const ConfigSchema = Joi.object<DocusaurusConfig>({
       .try(Joi.string().equal('babel'), Joi.function())
       .optional(),
   }).optional(),
+  socialCardService: Joi.function().default(
+    () => DEFAULT_CONFIG.socialCardService,
+  ),
 }).messages({
   'docusaurus.configValidationWarning':
     'Docusaurus config validation warning. Field {#label}: {#warningMessage}',

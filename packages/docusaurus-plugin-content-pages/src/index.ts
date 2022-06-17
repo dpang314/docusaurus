@@ -101,6 +101,10 @@ export default function pluginContentPages(
             type: 'jsx',
             permalink,
             source: aliasedSourcePath,
+            socialCardUrl: siteConfig.socialCardService.getUrl({
+              type: 'jsxPage',
+              defaults: context.siteConfig.socialCardService.defaults,
+            }),
           };
         }
         const content = await fs.readFile(source, 'utf-8');
@@ -117,6 +121,12 @@ export default function pluginContentPages(
           title: frontMatter.title ?? contentTitle,
           description: frontMatter.description ?? excerpt,
           frontMatter,
+          socialCardUrl: siteConfig.socialCardService.getUrl({
+            type: 'mdxPage',
+            defaults: context.siteConfig.socialCardService.defaults,
+            title: frontMatter.title ?? contentTitle,
+            description: frontMatter.description ?? excerpt,
+          }),
         };
       }
 

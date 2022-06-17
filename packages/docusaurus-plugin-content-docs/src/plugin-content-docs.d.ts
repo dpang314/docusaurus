@@ -443,6 +443,7 @@ declare module '@docusaurus/plugin-content-docs' {
     tags: Tag[];
     /** Front matter, as-is. */
     frontMatter: DocFrontMatter & {[key: string]: unknown};
+    socialCardUrl: string;
   };
 
   export type DocMetadata = DocMetadataBase &
@@ -465,6 +466,7 @@ declare module '@docusaurus/plugin-content-docs' {
      * index can only be generated from a category.
      */
     sidebar: string;
+    socialCardUrl: string;
   };
 
   export type PropNavigationLink = {
