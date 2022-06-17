@@ -76,7 +76,7 @@ export const DEFAULT_CONFIG: Pick<
     SocialCardData) => {
       switch (type) {
         case 'doc':
-          return `https://docusaurus-og-image.vercel.app/${title}`;
+          return `https://docusaurus-og-image.vercel.app/${encodeURI(title!)}`;
         default:
           return 'https://docusaurus-og-image.vercel.app/default';
       }
@@ -84,6 +84,7 @@ export const DEFAULT_CONFIG: Pick<
     defaults: {
       projectName: 'Docusaurus',
       projectLogo: 'https://docusaurus.io/img/docusaurus.svg',
+      url: 'https://docusaurus-og-image.vercel.app/default',
     },
   },
 };

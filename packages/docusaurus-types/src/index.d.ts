@@ -84,6 +84,7 @@ export type I18nConfig = {
 export type SocialCardDefaults = {
   projectName: string;
   projectLogo: string;
+  url: string;
 };
 
 export type SocialCardData = {

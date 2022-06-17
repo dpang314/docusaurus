@@ -15,7 +15,13 @@ import logger from '@docusaurus/logger';
 
 export default function SiteMetadataDefaults(): JSX.Element {
   const {
-    siteConfig: {favicon, title},
+    siteConfig: {
+      favicon,
+      title,
+      socialCardService: {
+        defaults: {url},
+      },
+    },
     i18n: {currentLocale, localeConfigs},
   } = useDocusaurusContext();
   const faviconUrl = useBaseUrl(favicon);
@@ -24,6 +30,7 @@ export default function SiteMetadataDefaults(): JSX.Element {
   const {socialCardUrls} = usePluginData('docusaurus-plugin-content-docs') as {
     socialCardUrls: {[key: string]: string};
   };
+  const imageUrl = socialCardUrls[location.pathname] || url;
   if (!socialCardUrls[location.pathname]) {
     logger.warn(
       `${location.pathname} is missing a socialCardUrl. Using default url.`,
@@ -37,9 +44,7 @@ export default function SiteMetadataDefaults(): JSX.Element {
       <meta property="og:title" content={title} />
       {/* {pageImage && <meta property="og:image" content={pageImage} />}
       {pageImage && <meta name="twitter:image" content={pageImage} />} */}
-      {socialCardUrls[location.pathname] && (
-        <meta property="og:image" content={socialCardUrls[location.pathname]} />
-      )}
+      <meta property="og:image" content={imageUrl} />
       {socialCardUrls[location.pathname] && (
         <meta
           property="twitter:image"
