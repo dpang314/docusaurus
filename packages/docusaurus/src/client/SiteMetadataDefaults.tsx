@@ -26,7 +26,7 @@ export default function SiteMetadataDefaults(): JSX.Element {
   };
   if (!socialCardUrls[location.pathname]) {
     logger.warn(
-      `${location.pathname} is missing a socialCardUrl; using default.`,
+      `${location.pathname} is missing a socialCardUrl. Using default url.`,
     );
   }
 
