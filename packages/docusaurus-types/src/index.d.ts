@@ -88,13 +88,13 @@ export type SocialCardDefaults = {
 };
 
 export type SocialCardData = {
-  readonly title?: string;
-  readonly description?: string;
-  readonly authorName?: string;
-  readonly authorProfileImage?: string;
-  readonly docVersion?: string;
-  readonly baseUrl?: string;
-  readonly type: 'doc' | 'blog' | 'jsxPage' | 'mdxPage' | '404' | 'default';
+  title?: string;
+  description?: string;
+  authorName?: string;
+  authorProfileImage?: string;
+  docVersion?: string;
+  baseUrl?: string;
+  type: 'doc' | 'blog' | 'jsxPage' | 'mdxPage' | '404' | 'default';
   defaults: SocialCardDefaults;
 };
 

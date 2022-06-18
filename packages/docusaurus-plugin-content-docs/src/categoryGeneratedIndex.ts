@@ -41,6 +41,8 @@ function getCategoryGeneratedIndexMetadata({
     },
     socialCardUrl: context.siteConfig.socialCardService.getUrl({
       type: 'doc',
+      title: category.link.title ?? category.label,
+      description: category.link.description,
       defaults: context.siteConfig.socialCardService.defaults,
     }),
   };
