@@ -304,10 +304,10 @@ export default async function pluginContentDocs(
 
       for (const version of versions) {
         for (const doc of version.docs) {
-          out[`${version.path}${doc.slug}`] = doc.socialCardUrl;
+          out[doc.permalink.replace(/\/$/, '')] = doc.socialCardUrl;
         }
         for (const category of version.categoryGeneratedIndices) {
-          out[`${version.path}${category.slug}`] = category.socialCardUrl;
+          out[category.permalink.replace(/\/$/, '')] = category.socialCardUrl;
         }
       }
 
