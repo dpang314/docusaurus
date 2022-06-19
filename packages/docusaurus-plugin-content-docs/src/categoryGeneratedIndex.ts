@@ -7,6 +7,7 @@
 
 import {type SidebarsUtils, toNavigationLink} from './sidebars/utils';
 import {createDocsByIdIndex} from './docs';
+import type {LoadContext} from '@docusaurus/types';
 import type {
   CategoryGeneratedIndexMetadata,
   DocMetadataBase,
@@ -17,10 +18,12 @@ function getCategoryGeneratedIndexMetadata({
   category,
   sidebarsUtils,
   docsById,
+  context,
 }: {
   category: SidebarItemCategoryWithGeneratedIndex;
   sidebarsUtils: SidebarsUtils;
   docsById: {[docId: string]: DocMetadataBase};
+  context: LoadContext;
 }): CategoryGeneratedIndexMetadata {
   const {sidebarName, previous, next} =
     sidebarsUtils.getCategoryGeneratedIndexNavigation(category.link.permalink);
@@ -36,15 +39,21 @@ function getCategoryGeneratedIndexMetadata({
       previous: toNavigationLink(previous, docsById),
       next: toNavigationLink(next, docsById),
     },
+    socialCardUrl: context.siteConfig.socialCardService.getUrl({
+      title: category.link.title ?? category.label,
+      type: 'doc',
+    }),
   };
 }
 
 export function getCategoryGeneratedIndexMetadataList({
   docs,
   sidebarsUtils,
+  context,
 }: {
   sidebarsUtils: SidebarsUtils;
   docs: DocMetadataBase[];
+  context: LoadContext;
 }): CategoryGeneratedIndexMetadata[] {
   const docsById = createDocsByIdIndex(docs);
 
@@ -55,6 +64,7 @@ export function getCategoryGeneratedIndexMetadataList({
       category,
       sidebarsUtils,
       docsById,
+      context,
     }),
   );
 }

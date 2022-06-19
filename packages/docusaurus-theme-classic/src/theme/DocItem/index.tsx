@@ -30,10 +30,12 @@ function DocItemMetadata(props: Props): JSX.Element {
   const {content: DocContent} = props;
   const {metadata, frontMatter, assets} = DocContent;
   const {keywords} = frontMatter;
-  const {description, title} = metadata;
+  const {description, title, socialCardUrl} = metadata;
   const image = assets.image ?? frontMatter.image;
 
-  return <PageMetadata {...{title, description, keywords, image}} />;
+  return (
+    <PageMetadata {...{title, description, keywords, image, socialCardUrl}} />
+  );
 }
 
 function DocItemContent(props: Props): JSX.Element {

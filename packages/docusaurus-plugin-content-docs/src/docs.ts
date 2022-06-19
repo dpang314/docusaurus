@@ -296,6 +296,10 @@ async function doProcessDocMetadata({
       : undefined,
     sidebarPosition,
     frontMatter,
+    socialCardUrl: context.siteConfig.socialCardService.getUrl({
+      title,
+      type: 'doc',
+    }),
   };
 }
 

@@ -40,6 +40,7 @@ export const DEFAULT_CONFIG: Pick<
   | 'tagline'
   | 'baseUrlIssueBanner'
   | 'staticDirectories'
+  | 'socialCardService'
 > = {
   i18n: DEFAULT_I18N_CONFIG,
   onBrokenLinks: 'throw',
@@ -58,6 +59,16 @@ export const DEFAULT_CONFIG: Pick<
   tagline: '',
   baseUrlIssueBanner: true,
   staticDirectories: [DEFAULT_STATIC_DIR_NAME],
+  socialCardService: {
+    getUrl: ({title, type}) => {
+      switch (type) {
+        case 'doc':
+          return `https://docusaurus-og-image.vercel.app/${encodeURI(title!)}`;
+        default:
+          return 'https://docusaurus-og-image.vercel.app/default';
+      }
+    },
+  },
 };
 
 function createPluginSchema(theme: boolean) {
@@ -236,6 +247,9 @@ export const ConfigSchema = Joi.object<DocusaurusConfig>({
       .try(Joi.string().equal('babel'), Joi.function())
       .optional(),
   }).optional(),
+  socialCardService: Joi.function().default(
+    () => DEFAULT_CONFIG.socialCardService,
+  ),
 }).messages({
   'docusaurus.configValidationWarning':
     'Docusaurus config validation warning. Field {#label}: {#warningMessage}',
