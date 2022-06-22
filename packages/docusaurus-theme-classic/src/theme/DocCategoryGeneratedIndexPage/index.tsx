@@ -48,6 +48,7 @@ function DocCategoryGeneratedIndexPageContent({
         keywords={categoryGeneratedIndex.keywords}
         // TODO `require` this?
         image={useBaseUrl(categoryGeneratedIndex.image)}
+        socialCardUrl={categoryGeneratedIndex.socialCardUrl}
       />
       <div className={styles.generatedIndexPage}>
         <DocVersionBanner />

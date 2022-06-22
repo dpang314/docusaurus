@@ -299,6 +299,7 @@ async function doProcessDocMetadata({
     socialCardUrl: context.siteConfig.socialCardService.getUrl({
       title,
       type: 'doc',
+      defaults: context.siteConfig.socialCardService.defaults,
     }),
   };
 }

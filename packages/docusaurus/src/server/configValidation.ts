@@ -68,6 +68,7 @@ export const DEFAULT_CONFIG: Pick<
           return 'https://docusaurus-og-image.vercel.app/default';
       }
     },
+    defaults: undefined,
   },
 };
 
@@ -247,9 +248,14 @@ export const ConfigSchema = Joi.object<DocusaurusConfig>({
       .try(Joi.string().equal('babel'), Joi.function())
       .optional(),
   }).optional(),
-  socialCardService: Joi.function().default(
-    () => DEFAULT_CONFIG.socialCardService,
-  ),
+  socialCardService: Joi.object({
+    getUrl: Joi.function().default(
+      () => DEFAULT_CONFIG.socialCardService.getUrl,
+    ),
+    defaults: Joi.object({
+      projectName: Joi.string().optional(),
+    }).optional(),
+  }).default(DEFAULT_CONFIG.socialCardService),
 }).messages({
   'docusaurus.configValidationWarning':
     'Docusaurus config validation warning. Field {#label}: {#warningMessage}',

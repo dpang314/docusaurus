@@ -96,6 +96,12 @@ export type SocialCardData = {
   // readonly docVersion?: string;
   // readonly baseUrl?: string;
   readonly type: 'doc' | 'blog' | 'jsxPage' | 'mdxPage' | '404' | 'default';
+  defaults: SocialCardDefaults | undefined;
+};
+
+export type SocialCardDefaults = {
+  readonly projectName?: string;
+  // readonly projectLogo?: string;
 };
 
 /**
@@ -355,6 +361,7 @@ export type DocusaurusConfig = {
 
   socialCardService: {
     getUrl: (data: SocialCardData) => string;
+    defaults?: SocialCardDefaults;
   };
 };
 
